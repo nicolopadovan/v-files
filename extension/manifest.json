@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "v-files",
+  "version": "0.1.0",
+  "description": "Turns Chrome's file:// folder pages into a file viewer with a tree and previews.",
+  "host_permissions": ["file:///*"],
+  "permissions": ["storage", "nativeMessaging", "offscreen"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["file:///*/", "file:///*.md", "file:///*.markdown"],
+      "js": ["content.js"],
+      "css": ["vendor/editor.css", "viewer.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/*", "vendor/*"],
+      "matches": ["file:///*"]
+    }
+  ]
+}
